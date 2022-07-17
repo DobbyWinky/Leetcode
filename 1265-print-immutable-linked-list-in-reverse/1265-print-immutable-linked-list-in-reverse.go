@@ -14,15 +14,10 @@
  */
 
 // Time - O(n)
-// Space - O(n)
+// Space - 1
 func printLinkedListInReverse(head ImmutableListNode) {
-    var helper func(head ImmutableListNode)
-    helper = func (head ImmutableListNode) {
-        if head==nil {
-            return
-        }
-        helper(head.getNext())
-        head.printValue()
+    for head != nil {
+        defer head.printValue()
+        head = head.getNext()
     }
-    helper(head)
 }
