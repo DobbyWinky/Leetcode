@@ -1,16 +1,22 @@
 type SparseVector struct {
-    arr []int
+    sparse map[int]int
 }
 
 func Constructor(nums []int) SparseVector {
-    return SparseVector{arr: nums}
+    sparse:=make(map[int]int)
+    for i, num:=range nums {
+        if num!=0 {
+            sparse[i]=num
+        }
+    }
+    return SparseVector{sparse}
 }
 
 // Return the dotProduct of two sparse vectors
 func (this *SparseVector) dotProduct(vec SparseVector) int {
     ans:=0
-    for i:=0;i<len(vec.arr);i++ {
-        ans+=vec.arr[i]*this.arr[i]
+    for k,v:=range vec.sparse {
+        ans+=v*this.sparse[k]
     }
     return ans
 }
