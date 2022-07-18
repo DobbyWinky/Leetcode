@@ -16,7 +16,9 @@ func Constructor(nums []int) SparseVector {
 func (this *SparseVector) dotProduct(vec SparseVector) int {
     ans:=0
     for k,v:=range vec.sparse {
-        ans+=v*this.sparse[k]
+        if this.sparse[k]!=0 {
+            ans+=v*this.sparse[k]
+        }
     }
     return ans
 }
