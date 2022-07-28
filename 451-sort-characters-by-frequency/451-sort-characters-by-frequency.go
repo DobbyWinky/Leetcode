@@ -2,7 +2,7 @@
 N is the length of string
 K is the freq of each char
 Q is the number of char with same freq
-Time - O(N*K*Q)
+Time - O(N)
 Space - O(N)
 */
 func frequencySort(s string) string {
