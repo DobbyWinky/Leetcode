@@ -4,7 +4,6 @@ Space - O(n^2)
 */
 func threeSum(nums []int) [][]int {
     ans:=make(map[[3]int]bool)
-    sort.Ints(nums)
     for i:=0;i<len(nums);i++ {
         seen:=make(map[int]int)
         for j:=i+1;j<len(nums);j++ {
