@@ -1,5 +1,5 @@
 /*
-Time - O(N)
+Time - O(N+MlogM)
 Space - O(N)
 */
 func earliestAcq(logs [][]int, n int) int {
