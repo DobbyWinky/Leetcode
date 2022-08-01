@@ -1,15 +1,20 @@
 /*
 Time - O(n)
-Space - O(n)
+Space - O(1)
 */
 func findDuplicates(nums []int) []int {
-    dup:=make([]int, 0)
-    hash:=make(map[int]bool)
-    for i:=0;i<len(nums);i++ {
-        if hash[nums[i]] {
-            dup=append(dup, nums[i])
+    res:=make([]int, 0)
+    for _, num:=range nums {
+        if nums[abs(num)-1]<0 {
+            res=append(res, abs(num))
         }
-        hash[nums[i]]=true
+        nums[abs(num)-1]*=-1
     }
-    return dup
+    return res
+}
+func abs(i int) int {
+    if i<0 {
+        return -i
+    }
+    return i
 }
