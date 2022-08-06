@@ -1,11 +1,17 @@
+/*
+Time - O(n)
+Space - O(1)
+*/
 type Codec struct {
 }
 
 // Encodes a list of strings to a single string.
 func (codec *Codec) Encode(strs []string) string {
-    ans:=""
-    for _, str:=range strs{
-        ans+=strconv.Itoa(len(str))+"#"
+    var ans string
+    for _, str:=range strs {
+        n:=len(str)
+        ans+=fmt.Sprintf("%04d",n)
+        ans+="#"
         ans+=str
     }
     return ans
@@ -13,26 +19,17 @@ func (codec *Codec) Encode(strs []string) string {
 
 // Decodes a single string to a list of strings.
 func (codec *Codec) Decode(strs string) []string {
-    ans:=make([]string, 0)
-    i:=0
-    for i<len(strs) {
-        var count []byte
-        for strs[i]!='#' {
-            count=append(count, strs[i])
-            i++
-        }
+    res:=make([]string, 0)
+    for i:=0;i<len(strs);i++ {
+        n:=strs[i:i+4]
+        nInt, _:=strconv.Atoi(n)
+        i+=4
         i++
-        countInt, _:=strconv.Atoi(string(count))
-        k:=0
-        var ansStr []byte
-        for k<countInt {
-            ansStr=append(ansStr, strs[i])
-            k++
-            i++
-        }
-        ans=append(ans, string(ansStr))
+        res=append(res, strs[i:i+nInt])
+        i+=nInt
+        i--
     }
-    return ans
+    return res
 }
 
 // Your Codec object will be instantiated and called as such:
