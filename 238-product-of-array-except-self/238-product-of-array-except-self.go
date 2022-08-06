@@ -11,7 +11,7 @@ func productExceptSelf(nums []int) []int {
     }
     r:=1
     for i:=n-1;i>=0;i-- {
-        ans[i]*=r
+        ans[i]=ans[i]*r
         r*=nums[i]
     }
     return ans
