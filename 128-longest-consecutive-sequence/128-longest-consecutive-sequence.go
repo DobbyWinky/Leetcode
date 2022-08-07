@@ -1,30 +1,26 @@
 /*
-    Time - O(nlogn)
+    Time - O(n)
     Space - O(1)
 */
 func longestConsecutive(nums []int) int {
-    if len(nums)==1 {
-        return 1
+    hash:=make(map[int]bool)
+    for i:=0;i<len(nums);i++ {
+        hash[nums[i]]=true
     }
-    sort.Ints(nums)
     max:=0
-    for i:=0;i<len(nums)-1;i++ {
-        k:=1
-        for i<len(nums)-1 {
-            if nums[i]+1==nums[i+1] {
+    for i:=0;i<len(nums);i++ {
+        if !hash[nums[i]-1] {
+            curr:=nums[i]
+            k:=1
+            for hash[curr+1] {
+                curr=curr+1
                 k++
-                i++
-            }else if nums[i]==nums[i+1] {
-                i++
-            }else {
-                break
             }
+            max=maximum(max, k)
         }
-        max=maximum(max, k)
     }
     return max
 }
-
 func maximum(i,j int) int {
     if i>j {
         return i
