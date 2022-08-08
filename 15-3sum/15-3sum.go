@@ -1,31 +1,29 @@
 /*
-Time - O(n2+nlogn)
-Space - O(n) - Depending sorting algo
+No sort algo
+Time - O(n2)
+Space - O(n)
 */
 func threeSum(nums []int) [][]int {
-    sort.Ints(nums)
-    ans:=make([][]int, 0)
+    res:=make(map[[3]int]bool)
     for i:=0;i<len(nums);i++ {
-        target:=nums[i]
-        if !(i==0 ||nums[i-1]!=nums[i]) {
-            continue
-        }
-        lo:=i+1
-        hi:=len(nums)-1
-        for lo<hi {
-            if nums[lo]+nums[hi]==-target {
-                ans=append(ans, []int{target, nums[lo], nums[hi]})
-                lo++
-                hi--
-                for lo<hi && nums[lo]==nums[lo-1] {
-                    lo++
-                }
-            }else if nums[lo]+nums[hi]>-target {
-                hi--
-            }else {
-                lo++
+        seen:=make(map[int]bool)
+        for j:=i+1;j<len(nums);j++ {
+            // Check for duplicates and chexk if the compliment exists in the hash map
+            // If the compliment exists, put the result into a map to avoid duplicates in the result
+            if seen[-(nums[i]+nums[j])] {
+                temp:=[]int{nums[i],nums[j],-(nums[i]+nums[j])}
+                // This sorting was required since the leetcode solution was expected to be sorted. This sorting takes O(1) since it sorts only 3 elements at a given point of time
+                sort.Ints(temp)
+                res[[3]int{temp[0],temp[1],temp[2]}]=true
             }
-        }
+            seen[nums[j]]=true
+        } 
+    }
+    
+    // Convert the map answer constructed in the previous steps to a slice which is expected by the leetcode solution
+    ans:=make([][]int, 0)
+    for k,_:=range res {
+        ans=append(ans, []int{k[0],k[1],k[2]})
     }
     return ans
 }
