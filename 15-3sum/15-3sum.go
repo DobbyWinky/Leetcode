@@ -1,23 +1,31 @@
 /*
-Time - O(n^2)
-Space - O(n^2)
+Time - O(n2+nlogn)
+Space - O(n) - Depending sorting algo
 */
 func threeSum(nums []int) [][]int {
-    ans:=make(map[[3]int]bool)
+    sort.Ints(nums)
+    ans:=make([][]int, 0)
     for i:=0;i<len(nums);i++ {
-        seen:=make(map[int]int)
-        for j:=i+1;j<len(nums);j++ {
-            if _, ok:=seen[-(nums[j]+nums[i])]; ok {
-                res:=[]int{nums[i],nums[j],-(nums[j]+nums[i])}
-                sort.Ints(res)         
-                ans[[3]int{res[0],res[1],res[2]}]=true
+        target:=nums[i]
+        if !(i==0 ||nums[i-1]!=nums[i]) {
+            continue
+        }
+        lo:=i+1
+        hi:=len(nums)-1
+        for lo<hi {
+            if nums[lo]+nums[hi]==-target {
+                ans=append(ans, []int{target, nums[lo], nums[hi]})
+                lo++
+                hi--
+                for lo<hi && nums[lo]==nums[lo-1] {
+                    lo++
+                }
+            }else if nums[lo]+nums[hi]>-target {
+                hi--
+            }else {
+                lo++
             }
-            seen[nums[j]]=j
         }
     }
-    ansFinal:=make([][]int, 0)
-    for k,_:=range ans {
-        ansFinal=append(ansFinal, []int{k[0],k[1],k[2]})
-    }
-    return ansFinal
+    return ans
 }
