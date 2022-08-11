@@ -7,30 +7,38 @@
  * }
  */
 
+/*
+Time - O(n)
+Space - O(n - Stack space only - No extra mem)
+*/
 func findMode(root *TreeNode) []int {
-    freq:=make(map[int]int)
+    prev:=-100001
+    ans:=make([]int, 0)
+    count:=1
+    maxCount:=0
     var helper func(root *TreeNode)
     helper=func(root *TreeNode) {
         if root==nil {
             return
         }
         helper(root.Left)
-        freq[root.Val]++
+        if prev!=-100001 {
+            if root.Val==prev {
+                count++
+            }else {
+                count=1
+            }
+        }
+        if count>maxCount {
+            ans=ans[:0]
+            maxCount=count
+            ans=append(ans, root.Val)
+        }else if count==maxCount {
+            ans=append(ans, root.Val)
+        }
+        prev=root.Val
         helper(root.Right)
     }
     helper(root)
-    maxFreq:=0
-    for _,v:=range freq {
-        if v>maxFreq {
-            maxFreq=v
-        }
-    }
-    
-    ans:=make([]int, 0)
-    for k,v:=range freq {
-        if v==maxFreq {
-            ans=append(ans, k)
-        }
-    }
     return ans
 }
