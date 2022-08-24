@@ -1,26 +1,17 @@
 func lengthOfLongestSubstring(s string) int {
-    if len(s)==0 || len(s)==1 {
-        return len(s)
-    }
-    i:=0
-    j:=1
     wordMap:=make(map[byte]int)
-    maxWindow:=1
-    wordMap[s[0]]++
+    i:=0
+    j:=0
+    window:=0
     for j<len(s) {
-        wordMap[s[j]]++
-        if wordMap[s[j]]==2 {
-            for s[i]!=s[j] {
-                wordMap[s[i]]--
-                i++
-            }
-            wordMap[s[i]]--
-            i++
+        if val, ok:=wordMap[s[j]]; ok {
+            i=max(i, val)
         }
-        maxWindow=max(maxWindow, j-i+1)
+        window=max(window, j-i+1)
+        wordMap[s[j]]=j+1
         j++
     }
-    return maxWindow
+    return window
 }
 
 func max(i,j int) int {
