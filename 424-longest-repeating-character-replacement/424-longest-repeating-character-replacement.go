@@ -7,9 +7,11 @@ func characterReplacement(s string, k int) int {
     left:=0
     right:=0
     maxWindow:=0
+    maxFreq:=0
     for right<len(s) {
         count[s[right]-'A']++
-        for right-left+1-max(count)>k {
+        maxFreq=max(maxFreq, count[s[right]-'A'])
+        for right-left+1-maxFreq>k {
             count[s[left]-'A']--
             left++
         }
@@ -21,12 +23,9 @@ func characterReplacement(s string, k int) int {
     return maxWindow
 }
 
-func max(count []int) int {
-    maxi:=0
-    for i:=0;i<26;i++ {
-        if count[i]>maxi {
-            maxi=count[i]
-        }
+func max(i,j int) int {
+    if i>j {
+        return i
     }
-    return maxi
+    return j
 }
