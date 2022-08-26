@@ -9,7 +9,7 @@ func characterReplacement(s string, k int) int {
     maxWindow:=0
     for right<len(s) {
         count[s[right]-'A']++
-        for left<=right && right-left+1-max(count)>k {
+        for right-left+1-max(count)>k {
             count[s[left]-'A']--
             left++
         }
