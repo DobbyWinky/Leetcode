@@ -6,22 +6,35 @@ func checkInclusion(s1 string, s2 string) bool {
     for i:=0;i<len(s1);i++ {
         count[s1[i]-'a']++
     }
-    windowSize:=len(s1)
+    countX:=make([]int, 26)
+    for k:=0;k<len(s1);k++ {
+        countX[s2[k]-'a']++
+    }
+    matches:=0
+    for i:=0;i<26;i++ {
+        if count[i]==countX[i]{
+            matches++
+        }
+    }
+    if matches==26 {
+        return true
+    }
     i:=0
-    j:=windowSize-1
+    j:=len(s1)
     for j<len(s2) {
-        countIn:=make([]int, 26)
-        for k:=i;k<=j;k++ {
-            countIn[s2[k]-'a']++
+        countX[s2[i]-'a']--
+        if countX[s2[i]-'a']==count[s2[i]-'a'] {
+            matches++
+        }else if count[s2[i]-'a']-1==countX[s2[i]-'a']{
+            matches--
         }
-        equal:=true
-        for i:=0;i<26;i++ {
-            if countIn[i]!=count[i] {
-                equal=false
-                break
-            }
+        countX[s2[j]-'a']++
+        if countX[s2[j]-'a']==count[s2[j]-'a'] {
+            matches++
+        }else if count[s2[j]-'a']+1==countX[s2[j]-'a']{
+            matches--
         }
-        if equal {
+        if matches==26 {
             return true
         }
         i++
