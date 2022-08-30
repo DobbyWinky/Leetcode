@@ -1,46 +1,49 @@
-/*
-Time - O(1)
-Space - O(2n)
-Store the value and the mininum value in the same stack
-*/
 type MinStack struct {
-    stack [][2]int
+    stack []int
+    minStack [][2]int
 }
 
 
 func Constructor() MinStack {
-    return MinStack{make([][2]int, 0)}
+    return MinStack{make([]int, 0), make([][2]int, 0)}
 }
 
-// Check if the value being pushed is less than the current min which is maintained in the stack
-// If the value is less, while pushing overwrite the current min in the next value being pushed
+
 func (this *MinStack) Push(val int)  {
     if len(this.stack)==0 {
-        this.stack=append(this.stack, [2]int{val, val})
-    }else {
-        this.stack=append(this.stack, [2]int{val, min(this.stack[len(this.stack)-1][1], val)})
+        this.stack=append(this.stack, val)
+        this.minStack=append(this.minStack, [2]int{val, 1})
+        return
+    }
+    this.stack=append(this.stack, val)
+    if val<this.minStack[len(this.minStack)-1][0] {
+        this.minStack=append(this.minStack, [2]int{val, 1})
+    }else if val==this.minStack[len(this.minStack)-1][0] {
+        this.minStack[len(this.minStack)-1][1]++
     }
 }
 
-func min(i,j int) int {
-    if i<j {
-        return i
-    }
-    return j
-}
 
 func (this *MinStack) Pop()  {
+    if this.minStack[len(this.minStack)-1][0]==this.stack[len(this.stack)-1] {
+        this.minStack[len(this.minStack)-1][1]--
+        if this.minStack[len(this.minStack)-1][1]==0 {
+            this.minStack=this.minStack[:len(this.minStack)-1]
+        }
+    }
     this.stack=this.stack[:len(this.stack)-1]
 }
 
 
 func (this *MinStack) Top() int {
-    return this.stack[len(this.stack)-1][0]
+    currStack:=this.stack
+    return currStack[len(currStack)-1]
 }
 
 
 func (this *MinStack) GetMin() int {
-    return this.stack[len(this.stack)-1][1]
+    currMinStack:=this.minStack
+    return currMinStack[len(currMinStack)-1][0]
 }
 
 
