@@ -1,3 +1,7 @@
+/*
+Time - O(n/2)
+Space - O(1)
+*/
 func breakPalindrome(palindrome string) string {
     pbyte:=[]byte(palindrome)
     if len(pbyte)==1 {
