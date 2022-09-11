@@ -1,22 +1,23 @@
 func highFive(items [][]int) [][]int {
-    hash:=make(map[int][]int)
-    for _, item:=range items {
-        hash[item[0]]=append(hash[item[0]], item[1])
+    avg:=make(map[int][]int)
+    for i:=0;i<len(items);i++ {
+        avg[items[i][0]]=append(avg[items[i][0]], items[i][1])
     }
-    ans:=make([][]int, 0)
-    sortedList:=make([]int, 0)
-    for k,_:=range hash {
-        sortedList=append(sortedList, k)
-    }
-    sort.Ints(sortedList)
-    for _, sl:=range sortedList {
-        sort.Ints(hash[sl])
-        v:=hash[sl]
-        avg:=0
+    res:=make([][]int, 0)
+    for k,v:=range avg {
+        sort.Slice(v, func(i,j int) bool {
+            return v[i]>v[j]
+        })
+        val:=make([]int,2)
+        val[0]=k
         for i:=0;i<5;i++ {
-            avg+=v[len(v)-i-1]
+            val[1]+=v[i]
         }
-        ans=append(ans, []int{sl,avg/5})
+        val[1]/=5
+        res=append(res, val)
     }
-    return ans
+    sort.Slice(res, func(i,j int) bool {
+        return res[i][0]<res[j][0]
+    })
+    return res
 }
