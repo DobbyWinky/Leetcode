@@ -13,8 +13,8 @@ func deleteDuplicatesUnsorted(head *ListNode) *ListNode {
         head=head.Next
     }
     temp2:=new(ListNode)
-    temp3:=temp2
     temp2.Next=temp
+    temp=temp2
     if duplicate[temp2.Next.Val]>1 {
         temp2.Next=temp2.Next.Next
     }
@@ -25,5 +25,5 @@ func deleteDuplicatesUnsorted(head *ListNode) *ListNode {
             temp2=temp2.Next
         }
     }
-    return temp3.Next
+    return temp.Next
 }
