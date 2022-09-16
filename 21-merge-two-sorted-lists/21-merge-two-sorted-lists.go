@@ -7,7 +7,7 @@
  */
 /*
 Time - O(n)
-Space - O(n)
+Space - O(1)
 */
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
     prev:=new(ListNode)
