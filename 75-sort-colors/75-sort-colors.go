@@ -1,3 +1,7 @@
+/*
+Time - O(n)
+Space - O(1)
+*/
 func sortColors(nums []int)  {
     zeroPointer:=0
     twoPointer:=len(nums)-1
