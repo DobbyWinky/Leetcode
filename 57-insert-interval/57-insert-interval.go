@@ -1,25 +1,34 @@
 /*
-Time - O(nlogn)
-Space - O(1)
+Time - O(n)
+Space - O(n)
 */
 func insert(intervals [][]int, newInterval []int) [][]int {
-    intervals=append(intervals, newInterval)
-    sort.Slice(intervals, func (i,j int) bool {
-        return intervals[i][0]<intervals[j][0]
-    })
     res:=make([][]int, 0)
-    res=append(res, intervals[0])
-    for i:=1;i<len(intervals);i++ {
-        if intervals[i][0]<=res[len(res)-1][1] {
-            res[len(res)-1][1]=max(res[len(res)-1][1], intervals[i][1])
+    for i:=0;i<len(intervals);i++ {
+        if newInterval[1]<intervals[i][0] {
+            res=append(res, newInterval)
+            res=append(res, intervals[i:]...)
+            return res
+        }else if newInterval[0]<=intervals[i][1] {
+            newInterval[0]=min(newInterval[0], intervals[i][0])
+            newInterval[1]=max(newInterval[1], intervals[i][1])
         }else {
             res=append(res, intervals[i])
         }
     }
+    res=append(res, newInterval)
+    
     return res
 }
 
-func max(i, j int) int {
+func min(i, j int) int {
+    if i<j {
+        return i
+    }
+    return j
+}
+
+func max(i,j int) int {
     if i>j {
         return i
     }
