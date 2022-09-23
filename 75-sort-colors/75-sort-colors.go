@@ -1,18 +1,18 @@
-/*
-Time: O(n)
-Space: O(n)
-*/
 func sortColors(nums []int)  {
-    count:=make(map[int]int)
-    for _, num:=range nums {
-        count[num]++
-    }
-    p:=0
-    for i:=0;i<3;i++ {
-        for count[i]!=0 {
-            nums[p]=i
-            p++
-            count[i]--
+    zeroPointer:=0
+    twoPointer:=len(nums)-1
+    curr:=0
+
+    for curr<=twoPointer {
+        if nums[curr]==0 {
+            nums[curr], nums[zeroPointer]=nums[zeroPointer], nums[curr]
+            zeroPointer++
+            curr++
+        }else if nums[curr]==2 {
+            nums[curr], nums[twoPointer]=nums[twoPointer], nums[curr]
+            twoPointer--
+        }else {
+            curr++
         }
     }
 }
