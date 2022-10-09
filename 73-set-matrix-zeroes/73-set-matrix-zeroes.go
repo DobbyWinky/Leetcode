@@ -1,6 +1,6 @@
 /*
 Time - O(m*n)
-Space - O(m+n)
+Space - O(1)
 */
 func setZeroes(matrix [][]int)  {
     zeroRow:=1
