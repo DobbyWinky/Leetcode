@@ -23,6 +23,11 @@
  * // You can access NestedInteger's List element directly if you want to modify it
  * func (n NestedInteger) GetList() []*NestedInteger {}
  */
+/*
+Time - O(N)
+Space - O(N)
+N is the number of nested elements
+*/
 func depthSum(nestedList []*NestedInteger) int {
     queue:=make([]*NestedInteger, 0)
     queue=append(queue, nestedList...)
