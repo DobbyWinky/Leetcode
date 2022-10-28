@@ -30,7 +30,8 @@ Space - O(N)
 */
 func depthSumInverse(nestedList []*NestedInteger) int {
     queue:=make([]*NestedInteger, 0)
-    elements:=make([][2]int, 0)
+    sum:=0
+    prod:=0
     queue=append(queue, nestedList...)
     depth:=1
     for len(queue)>0 {
@@ -40,16 +41,13 @@ func depthSumInverse(nestedList []*NestedInteger) int {
             pop:=queue[0]
             queue=queue[1:]
             if pop.IsInteger() {
-                elements=append(elements, [2]int{pop.GetInteger(), depth})
+                sum+=pop.GetInteger()
+                prod+=pop.GetInteger()*depth
             }else {
                 queue=append(queue, pop.GetList()...)
             }
         }
         depth++
     }
-    ans:=0
-    for _, e := range elements {
-        ans+=(depth-e[1])*e[0]
-    }
-    return ans
+    return depth*(sum)-prod
 }
