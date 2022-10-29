@@ -1,3 +1,7 @@
+/*
+Time - O(max(L1, L2))
+Space - O(N)
+*/
 type WordDistance struct {
     words map[string][]int
 }
@@ -22,14 +26,22 @@ func abs(i int) int {
 
 func (this *WordDistance) Shortest(word1 string, word2 string) int {
     wordMap:=this.words
-    dist1:=wordMap[word1]
-    dist2:=wordMap[word2]
+    list1:=wordMap[word1]
+    list2:=wordMap[word2]
+    i:=0
+    j:=0
     min:=9999999999999
-    for i:=0;i<len(dist1);i++ {
-        for j:=0;j<len(dist2);j++ {
-            if abs(dist1[i]-dist2[j])<min {
-                min=abs(dist1[i]-dist2[j])
-            }
+    for i<len(list1) && j<len(list2) {
+        if abs(list1[i]-list2[j])<min {
+            min=abs(list1[i]-list2[j])
+        }
+        if list1[i]==list2[j]{
+            return 0
+        }
+        if list1[i]<list2[j]{
+            i++
+        }else {
+            j++
         }
     }
     return min
