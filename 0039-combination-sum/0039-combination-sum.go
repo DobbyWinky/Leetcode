@@ -1,3 +1,8 @@
+/*
+Time - O(2^t)
+Space - O(t)
+*/
+
 func combinationSum(candidates []int, target int) [][]int {
     res:=make([][]int, 0)
     var dfs func(i, start int, curr []int) 
