@@ -1,6 +1,6 @@
 /*
 Time - O(n)
-Space - O(n)
+Space - O(1)
 */
 
 func productExceptSelf(nums []int) []int {
