@@ -1,3 +1,7 @@
+/*
+Time -O(nlogn)
+Space - O(n)
+*/
 func merge(intervals [][]int) [][]int {
     sort.Slice(intervals, func(i,j int)bool {
         if intervals[i][0]<intervals[j][0] {
