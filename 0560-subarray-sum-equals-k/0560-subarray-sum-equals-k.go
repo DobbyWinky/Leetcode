@@ -1,17 +1,18 @@
 /*
-Time - O(n^2)
-Space - O(1)
+Time - O(n)
+Space - O(n)
 */
 func subarraySum(nums []int, k int) int {
-    count:=0
+    hash:=make(map[int]int)
+    sum:=0
+    ans:=0
+    hash[0]=1
     for i:=0;i<len(nums);i++ {
-        sum:=0
-        for j:=i;j<len(nums);j++ {
-            sum+=nums[j]
-            if sum==k {
-                count++
-            }
+        sum+=nums[i]
+        if val, ok:=hash[sum-k];ok {
+            ans+=val
         }
+        hash[sum]++
     }
-    return count
+    return ans
 }
