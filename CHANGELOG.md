@@ -1,5 +1,19 @@
 # Changelog
 
+## [v2.0.0](https://github.com/DobbyWinky/Leetcode/tree/v2.0.0) (2022-12-18)
+
+[Full Changelog](https://github.com/DobbyWinky/Leetcode/compare/v1.0.1...v2.0.0)
+
+**Merged pull requests:**
+
+- Adding target commitish [\#6](https://github.com/DobbyWinky/Leetcode/pull/6) ([DobbyWinky](https://github.com/DobbyWinky))
+- Add changelog [\#5](https://github.com/DobbyWinky/Leetcode/pull/5) ([DobbyWinky](https://github.com/DobbyWinky))
+- Adding a small pull request [\#4](https://github.com/DobbyWinky/Leetcode/pull/4) ([DobbyWinky](https://github.com/DobbyWinky))
+
+## [v1.0.1](https://github.com/DobbyWinky/Leetcode/tree/v1.0.1) (2022-12-18)
+
+[Full Changelog](https://github.com/DobbyWinky/Leetcode/compare/v1.0.0...v1.0.1)
+
 ## [v1.0.0](https://github.com/DobbyWinky/Leetcode/tree/v1.0.0) (2022-12-17)
 
 [Full Changelog](https://github.com/DobbyWinky/Leetcode/compare/39204cd2c195048fd4264d67d60f601e4279926a...v1.0.0)
