@@ -2,7 +2,6 @@ class Solution:
 
     def __init__(self, w: List[int]):
         self.cumulative=[]
-        self.curr=w
         total=0
         
         for i in w:
