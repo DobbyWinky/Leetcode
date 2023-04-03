@@ -4,7 +4,6 @@ class Solution:
         ans=[]
         def helper(index, curr: List[str]):
             if index==n:
-                print(curr)
                 temp=curr[:]
                 ans.append(temp)
                 return
