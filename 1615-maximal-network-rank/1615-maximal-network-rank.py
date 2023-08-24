@@ -8,7 +8,7 @@ class Solution:
         for i in range(n):
             for j in range(i+1, n):
                 value=len(adj[i])+len(adj[j])
-                if [i,j] in roads or [j,i] in roads:
+                if j in adj[i]:
                     value-=1
                 ans=max(ans, value)
          
