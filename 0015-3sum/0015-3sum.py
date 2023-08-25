@@ -1,14 +1,17 @@
-#Time: O(n2)
-#Space: O(n)
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
+        n=len(nums)
         ans=set()
-        for i in range (len(nums)):
+        ansList=[]
+        for i in range(n):
             hash=set()
-            for j in range (i+1, len(nums)):
+            for j in range(i+1, n):
                 if -(nums[i]+nums[j]) in hash:
                     ans.add(tuple(sorted((nums[i], nums[j], -(nums[i]+nums[j])))))
                 else:
                     hash.add(nums[j])
-        return [elem for elem in ans]
+        for k in ans:
+            ansList.append(k)
+        return ansList
+            
         
