@@ -1,13 +1,15 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
+        l=0
+        r=0
         n=len(nums)
-        dp=[0]*n
-        for i in range(n):
-            for j in range(1, nums[i]+1):
-                if i+j<n:
-                    if dp[i+j]==0:
-                        dp[i+j]=1+dp[i]
-                    else:
-                        dp[i+j]=min(dp[i+j], 1+dp[i])
-        return dp[n-1]
+        ans=0
+        while r<n-1:
+            farthest=0
+            for i in range(l,r+1):
+                farthest=max(farthest, i+nums[i])
+            l=r+1
+            r=farthest
+            ans+=1
+        return ans
         
