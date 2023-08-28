@@ -5,18 +5,17 @@ class Solution:
             adj[p[0]].append(p[1])
         vis=collections.defaultdict(int)
         ans=[]
-        def cycle(course):
+        def dfs(course):
             if vis[course]==2:
                 return True
             vis[course]=2
             for nei in adj[course]:
-                if vis[nei]!=1 and cycle(nei):
+                if vis[nei]!=1 and dfs(nei):
                     return True
             vis[course]=1
             ans.append(course)
-            return False
-        for i in range(numCourses):
-            if vis[i]!=1 and cycle(i):
+        for n in range(numCourses):
+            if vis[n]!=1 and dfs(n):
                 return []
         return ans
         
