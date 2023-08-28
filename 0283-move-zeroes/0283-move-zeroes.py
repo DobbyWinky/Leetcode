@@ -6,6 +6,4 @@ class Solution:
             if nums[i]!=0:
                 nums[i], nums[zeroPos]=nums[zeroPos], nums[i]
                 zeroPos+=1
-
-        
         
