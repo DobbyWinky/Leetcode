@@ -10,18 +10,14 @@ class Solution:
         Do not return anything, modify root in-place instead.
         """
         def dfs(root):
-            if root==None:
+            if not root:
                 return None
-            leftTail=dfs(root.left)
-            rightTail=dfs(root.right)
-            if root.left:
-                leftTail.right=root.right
+            left=dfs(root.left)
+            right=dfs(root.right)
+            if left:
+                left.right=root.right
                 root.right=root.left
                 root.left=None
-            if rightTail:
-                return rightTail
-            if leftTail:
-                return leftTail
-            return root
+            return right or left or root
         return dfs(root)
         
