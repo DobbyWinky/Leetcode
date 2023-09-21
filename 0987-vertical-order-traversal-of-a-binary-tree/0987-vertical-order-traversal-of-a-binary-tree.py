@@ -7,34 +7,26 @@
 class Solution:
     def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
         queue=[]
-        queue.append([root,0,0])
-        ans=OrderedDict()
-        ansVal =[]
+        queue.append([root, 0,0])
+        order=collections.defaultdict(lambda:collections.defaultdict(list))
         while len(queue)>0:
             size=len(queue)
             while size>0:
-                pop=queue.pop(0)
-                val = pop[0].val
-                col = pop[1]
-                level=pop[2]
-                if col not in ans:
-                    ans[col]=OrderedDict()
-                if level not in ans[col]:
-                    ans[col][level]=[]
-                ans[col][level].append(val)
-                ans[col][level].sort()
-                if pop[0].left!=None:
-                    queue.append([pop[0].left, pop[1]-1, pop[2]+1])
-                if pop[0].right!=None:
-                    queue.append([pop[0].right, pop[1]+1, pop[2]+1])
+                node, col, row=queue.pop(0)
+                order[col][row].append(node.val)
+                order[col][row].sort()
+                if node.left!=None:
+                    queue.append([node.left, col-1,row+1])
+                if node.right!=None:
+                    queue.append([node.right, col+1, row+1])
                 size-=1
-        ansVal=[]
-        for k, v in sorted(ans.items()):
-            ans2=[]
-            for k1,v1 in v.items():
-                for x in v1:
-                    ans2.append(x)
-            ansVal.append(ans2)
-        return ansVal
-        
+        ans=[]
+        for k in sorted(order):
+            curr=[]
+            for v in order[k].items():
+                for x in v[1]:
+                    curr.append(x)
+            ans.append(curr)
+                
+        return ans
         
