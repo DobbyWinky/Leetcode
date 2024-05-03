@@ -9,8 +9,8 @@ class Solution:
             if nums[i] not in dups:
                 dups.add(nums[i])
                 for j in range(i+1, n):
-                    if -(nums[i]+nums[j]) in hash and hash[-(nums[i]+nums[j])]!=i and hash[-(nums[i]+nums[j])]!=j:
+                    if -(nums[i]+nums[j]) in hash and hash[-(nums[i]+nums[j])]==i:
                         ans.add(tuple(sorted((nums[i], nums[j], -(nums[i]+nums[j])))))
-                    hash[nums[j]]=j
+                    hash[nums[j]]=i
         return ans
                 
